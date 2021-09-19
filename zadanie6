@@ -1,4 +1,4 @@
-#sp1
+#Способ 1
 class Animal:
     def voice(self):
         pass
@@ -20,7 +20,7 @@ dog.voice_dog()
 cat.voice_cat()
 mouse.voice_mouse()
 ##
-#sp2
+#Способ 2
 class Animal:
     def voice(self):
         pass
