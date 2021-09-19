@@ -1,0 +1,21 @@
+class Animal:
+    def voice(self):
+        pass
+class Dog(Animal):
+    name = "Charlie"
+    def voice_dog(self):
+        print(self.name + " says: " + 'Wow!')
+class Cat(Animal):
+    name = "Tom"
+    def voice_cat(self):
+        print(self.name + " says: " + 'Meow!')
+class Mouse(Animal):
+    name = "Jerry"
+    def voice_mouse(self):
+        print(self.name + " says: " + 'Я порву тебя котэ!')
+dog = Dog()
+cat = Cat()
+mouse = Mouse()
+dog.voice_dog()
+cat.voice_cat()
+mouse.voice_mouse()
