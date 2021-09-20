@@ -1,0 +1,12 @@
+path = 'C:\\Users\\KAgarkova\\Desktop\\select.txt'
+with open(path, 'r') as f:
+    line = f.readline()
+line2 = []
+for i in reversed(line):
+    line2.append(i)
+with open('tceles.txt', 'w') as f2:
+    f2.writelines(line2)
+with open(path, 'r') as f:
+    print(f.readline())
+with open('tceles.txt', 'r') as f2:
+    print(f2.readline())
