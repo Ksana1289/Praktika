@@ -33,6 +33,7 @@ class Search(unittest.TestCase):
                 EC.presence_of_element_located((By.XPATH, '//*[text() = "ru.selenide.org"]')))
         except TimeoutException:
             raise Exception('Unable to find text in this element after waiting 5 seconds')
+            
         elm = self.driv.find_element_by_xpath("//*[@id='yDmH0d']/div[2]/c-wiz/div[1]/div/div[1]/div[1]/div/div/a[1]")
         elm.click();
         elm = self.driv.find_element_by_xpath("//*[@id='rso']/div[1]/div/div/div/div/div/div[1]/a")
