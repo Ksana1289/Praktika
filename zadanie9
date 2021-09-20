@@ -1,0 +1,21 @@
+import threading
+import time
+
+class flow(threading.Thread):
+    def __init__(self, name, interval):
+        super().__init__()
+        self.daemon = True
+        self.name = name
+        self.interval = interval
+    def run(self):
+        for i in reversed(range(1, 11)):
+            print(' Name queue = ', self.name, f' Time: {time.ctime()}', ' vivod = ', i)
+            time.sleep(self.interval)
+
+time1 = flow('1 Potok', 1)
+time2 = flow('2 Potok', 1)
+
+time1.start()
+time2.start()
+time1.join()
+time2.join()
