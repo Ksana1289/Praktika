@@ -1,0 +1,48 @@
+import unittest
+
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+
+class Search(unittest.TestCase):
+    def setUp(self):
+        path = 'C:\\Users\\Киса\\Downloads\\chromedriver.exe'
+        self.driv = webdriver.Chrome(path)
+        self.driv.get("http://google.com/ncr")
+
+    def test_search(self):
+        assert "Google" in self.driv.title
+        elm = self.driv.find_element_by_name("q")
+        elm.send_keys("selenide")
+        elm.send_keys(Keys.RETURN)
+        elm = self.driv.find_element_by_xpath("//*[@id='rso']/div[1]/div/div/div/div/div/div[1]/a")
+        if "ru.selenide.org" in elm.text:
+            print("Первая ссылка соответствует поисковому запросу")
+        f1=self.driv.find_element_by_xpath("//*[@id='rso']/div[1]/div/div/div/div/div/div[1]/a/h3")
+        t=f1.text;
+        elm=self.driv.find_element_by_xpath("//*[@id='hdtb-msb']/div[1]/div/div[2]/a")
+        elm.click();
+        elm=self.driv.find_element_by_xpath("//*[@id='REsRA']")
+        elm.click();
+        try:
+            WebDriverWait(self.driv, 5).until(
+                EC.presence_of_element_located((By.XPATH, '//*[text() = "ru.selenide.org"]')))
+        except TimeoutException:
+            raise Exception('Unable to find text in this element after waiting 5 seconds')
+        elm = self.driv.find_element_by_xpath("//*[@id='yDmH0d']/div[2]/c-wiz/div[1]/div/div[1]/div[1]/div/div/a[1]")
+        elm.click();
+        elm = self.driv.find_element_by_xpath("//*[@id='rso']/div[1]/div/div/div/div/div/div[1]/a")
+        f2 = self.driv.find_element_by_xpath("//*[@id='rso']/div[1]/div/div/div/div/div/div[1]/a/h3")
+        if ("ru.selenide.org" in elm.text) and (t in f2.text):
+            print("Ссылки после переключения вкладок одинаковые")
+
+        assert "No results found." not in self.driv.page_source
+    def tearDown(self):
+        self.driv.close()
+
+if __name__ == '__main__':
+    unittest.main()
